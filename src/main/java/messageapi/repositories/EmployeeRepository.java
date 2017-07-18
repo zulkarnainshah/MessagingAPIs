@@ -9,10 +9,14 @@
 
 package messageapi.repositories;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import messageapi.models.Employee;
 
 public interface EmployeeRepository extends CrudRepository<Employee,Long>{
 	
+	@Query(nativeQuery=true,value="select * from employee where emp_id = :emp_ID")
+	public Employee getEmployeeByEmpID(@Param("emp_ID")String emp_ID);
 }

@@ -5,10 +5,13 @@
 
 package messageapi.controllers;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import messageapi.models.Employee;
@@ -23,6 +26,15 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/employee/post",method= RequestMethod.POST)
 	public void post(@RequestBody Employee employee) {
+		if(employee.getEmp_ID() == null) {
+			employee.setEmp_ID(UUID.randomUUID().toString());
+		}
 		employeeRepository.save(employee);
+	}
+	
+	@RequestMapping(value="/employee/getEmployee",method= RequestMethod.GET,produces="application/json")
+	public Employee get(@RequestParam(value="emp_ID") String emp_ID) {
+		Employee employee = employeeRepository.getEmployeeByEmpID(emp_ID);
+		return employee;
 	}
 }
