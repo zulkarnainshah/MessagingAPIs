@@ -21,7 +21,8 @@ public class Employee {
 
 	String name;
 	String empID;
-
+	String email;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -34,9 +35,10 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(String empID, String name) {
+	public Employee(String empID, String name, String email) {
 		this.empID = empID;
 		this.name = name;
+		this.email = email;
 	}
 
 	public String getName() {
@@ -53,6 +55,14 @@ public class Employee {
 
 	public void setEmpID(String empID) {
 		this.empID = empID;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

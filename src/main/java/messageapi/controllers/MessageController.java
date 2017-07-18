@@ -31,9 +31,9 @@ public class MessageController {
 		ArrayList<Message>messageList = new ArrayList<>();
 		//TODO: Query database for messages for the user_ID sent in header or maybe requestBody itself, add to messageList and return
 		// Adding dummy messages for the time being
-		messageList.add(new Message("Whats up?","Hello guys, i was wondering what you were doing.","27/01/2017",new Employee(UUID.randomUUID().toString(),"Zulkarnain Shah")));
-		messageList.add(new Message("Did you email the client?","Send me a copy too if you have done so","12/07/2017",new Employee(UUID.randomUUID().toString(),"Aadil Majeed")));
-		messageList.add(new Message("Release date","We are very positive about releasing Core on 19th July 2017.","15/07/2017",new Employee(UUID.randomUUID().toString(),"Uzair Mohammad")));
+		messageList.add(new Message("Whats up?","Hello guys, i was wondering what you were doing.","27/01/2017",new Employee(UUID.randomUUID().toString(),"Zulkarnain Shah",null)));
+		messageList.add(new Message("Did you email the client?","Send me a copy too if you have done so","12/07/2017",new Employee(UUID.randomUUID().toString(),"Aadil Majeed",null)));
+		messageList.add(new Message("Release date","We are very positive about releasing Core on 19th July 2017.","15/07/2017",new Employee(UUID.randomUUID().toString(),"Uzair Mohammad",null)));
 		return messageList.size() > 0 ? ResponseEntity.ok(messageList) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
 }

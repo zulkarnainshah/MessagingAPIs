@@ -20,7 +20,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	@Query(nativeQuery = true, value = "select * from employee where empid = :empID")
 	public Employee getEmployeeByEmpID(@Param("empID") String empID);
 
-	public Employee findOneByName(String name);
+	public Employee findOneByEmail(String email);
 
 	public Employee findOneByEmpID(String empID);
 }

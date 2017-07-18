@@ -26,17 +26,16 @@ public class EmployeeController {
 				// by Spring, we will use it to handle the data
 	private EmployeeRepository employeeRepository;
 
-	/** Adds a new Employee to the employee table **/
+	/** POST a new Employee to the employee table **/
 	@RequestMapping(value = "/employee/post", method = RequestMethod.POST)
 	public ResponseEntity<Employee> post(@RequestBody Employee employee) {
-		if (employeeRepository.findOneByName(employee.getName()) == null) {
+		if (employeeRepository.findOneByEmail(employee.getEmail()) == null) {
 			employee.setEmpID(UUID.randomUUID().toString());
 			employeeRepository.save(employee);
 			return ResponseEntity.ok(null);
 		} else {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
 		}
-
 	}
 
 	/** Returns all employees from the employee table **/
