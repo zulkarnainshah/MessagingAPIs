@@ -10,6 +10,13 @@ public class Message {
 	String body;
 	String dateSent;
 	Employee sentBy;
+	
+	public Message(String title,String body,String dateSent,Employee sentBy) {
+		this.title = title;
+		this.body = body;
+		this.dateSent = dateSent;
+		this.sentBy = sentBy;
+	}
 	public String getTitle() {
 		return title;
 	}
