@@ -17,10 +17,13 @@ import messageapi.models.Employee;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
-	@Query(nativeQuery = true, value = "select * from employee where empid = :empID")
-	public Employee getEmployeeByEmpID(@Param("empID") String empID);
+//	@Query(nativeQuery = true, value = "select * from employee where empid = :empID")
+//	public Employee getEmployeeByEmpID(@Param("empID") String empID);
 
 	public Employee findOneByEmail(String email);
 
-	public Employee findOneByEmpID(String empID);
+	public Employee findOneByEmpID(String empID); 
+	
+//	@Query(nativeQuery=true,value="update employee")
+//	public void updateEmployee(Employee employee);
 }

@@ -7,6 +7,7 @@
 
 package messageapi.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +21,10 @@ public class Employee {
 	private Integer id;
 
 	String name;
+	@Column(unique = true)
 	String empID;
 	String email;
-	
+
 	public Integer getId() {
 		return id;
 	}

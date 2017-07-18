@@ -47,7 +47,7 @@ public class EmployeeController {
 	/** Returns Employee specified by the empID query parameter **/
 	@RequestMapping(value = "/employee/getEmployee", method = RequestMethod.GET, produces = "application/json")
 	public Employee getEmployeeDetail(@RequestParam(value = "empID") String empID) {
-		Employee employee = employeeRepository.getEmployeeByEmpID(empID);
+		Employee employee = employeeRepository.findOneByEmpID(empID);
 		return employee;
 	}
 
@@ -61,5 +61,4 @@ public class EmployeeController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 	}
-
 }
