@@ -15,8 +15,12 @@ import org.springframework.data.repository.query.Param;
 
 import messageapi.models.Employee;
 
-public interface EmployeeRepository extends CrudRepository<Employee,Long>{
-	
-	@Query(nativeQuery=true,value="select * from employee where emp_id = :emp_ID")
-	public Employee getEmployeeByEmpID(@Param("emp_ID")String emp_ID);
+public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+
+	@Query(nativeQuery = true, value = "select * from employee where empid = :empID")
+	public Employee getEmployeeByEmpID(@Param("empID") String empID);
+
+	public Employee findOneByName(String name);
+
+	public Employee findOneByEmpID(String empID);
 }
