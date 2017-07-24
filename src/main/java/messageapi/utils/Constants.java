@@ -5,7 +5,7 @@
 package messageapi.utils;
 
 public class Constants {
-	public static class Strings{
+	public static class Strings {
 		public static String SUCCESS = "The action was completed successfully";
 		public static String WARNING = "Warning! Saving this record may cause unexpected behavior";
 		public static String CONFLICT = "A record with those properties already exists";

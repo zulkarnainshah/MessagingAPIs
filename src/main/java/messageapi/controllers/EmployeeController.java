@@ -2,7 +2,6 @@
  * @author Zulkarnain Shah
  * @date 17-Jul-2017
  */
- 
 
 package messageapi.controllers;
 
@@ -28,7 +27,7 @@ public class EmployeeController {
 				// by Spring, we will use it to handle the data
 	private EmployeeRepository employeeRepository;
 
-	/** POST a new Employee to the employee table **/
+	/** POST a new Employee **/
 	@RequestMapping(value = "/employee/post", method = RequestMethod.POST)
 	public ResponseEntity<?> post(@RequestBody Employee employee) {
 		if (employeeRepository.findOneByEmail(employee.getEmail()) == null) {
@@ -36,7 +35,8 @@ public class EmployeeController {
 			employeeRepository.save(employee);
 			return ResponseEntity.ok(employee);
 		} else {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(ServerResponse.conflict("A user with that email already exists"));
+			return ResponseEntity.status(HttpStatus.CONFLICT)
+					.body(ServerResponse.conflict("A user with that email already exists"));
 		}
 	}
 
@@ -48,9 +48,14 @@ public class EmployeeController {
 
 	/** Returns Employee specified by the empID request parameter **/
 	@RequestMapping(value = "/employee/getEmployee", method = RequestMethod.GET, produces = "application/json")
-	public Employee getEmployeeDetail(@RequestParam(value = "empID") String empID) {
+	public ResponseEntity<?> getEmployeeDetail(@RequestParam(value = "empID") String empID) {
 		Employee employee = employeeRepository.findOneByEmpID(empID);
-		return employee;
+		if (employee != null) {
+			return ResponseEntity.ok(employee);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ServerResponse.notFound(null));
+		}
+
 	}
 
 	@RequestMapping(value = "/employee/deleteEmployee", method = RequestMethod.DELETE)
