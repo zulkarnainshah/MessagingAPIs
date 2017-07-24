@@ -1,7 +1,8 @@
 /**
  * @author Zulkarnain Shah
- * @date 18-Jul-2017
+ * @date 17-Jul-2017
  */
+ 
 
 package messageapi.controllers;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import messageapi.models.Employee;
+import messageapi.models.ServerResponse;
 import messageapi.repositories.EmployeeRepository;
 
 @RestController
@@ -28,13 +30,13 @@ public class EmployeeController {
 
 	/** POST a new Employee to the employee table **/
 	@RequestMapping(value = "/employee/post", method = RequestMethod.POST)
-	public ResponseEntity<Employee> post(@RequestBody Employee employee) {
+	public ResponseEntity<?> post(@RequestBody Employee employee) {
 		if (employeeRepository.findOneByEmail(employee.getEmail()) == null) {
 			employee.setEmpID(UUID.randomUUID().toString());
 			employeeRepository.save(employee);
-			return ResponseEntity.ok(null);
+			return ResponseEntity.ok(employee);
 		} else {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(ServerResponse.conflict("A user with that email already exists"));
 		}
 	}
 
@@ -44,7 +46,7 @@ public class EmployeeController {
 		return employeeRepository.findAll();
 	}
 
-	/** Returns Employee specified by the empID query parameter **/
+	/** Returns Employee specified by the empID request parameter **/
 	@RequestMapping(value = "/employee/getEmployee", method = RequestMethod.GET, produces = "application/json")
 	public Employee getEmployeeDetail(@RequestParam(value = "empID") String empID) {
 		Employee employee = employeeRepository.findOneByEmpID(empID);
@@ -52,13 +54,13 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/employee/deleteEmployee", method = RequestMethod.DELETE)
-	public ResponseEntity<Employee> deleteEmployee(@RequestParam(value = "empID") String empID) {
+	public ResponseEntity<?> deleteEmployee(@RequestParam(value = "empID") String empID) {
 		Employee employee = employeeRepository.findOneByEmpID(empID);
 		if (employee != null) {
 			employeeRepository.delete(employee);
-			return ResponseEntity.ok(null);
+			return ResponseEntity.ok(ServerResponse.success(null));
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ServerResponse.notFound(null));
 		}
 	}
 }

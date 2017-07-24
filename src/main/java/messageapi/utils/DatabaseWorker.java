@@ -4,7 +4,7 @@
  */
 
 /** This class takes care of communicating with a persistent store , whatever that might be. A normal MySQL database,  
- * an ORM, Hibernate, or Firebase
+ * an ORM supported DB, Hibernate, or Firebase
  * */
 
 package messageapi.utils;
